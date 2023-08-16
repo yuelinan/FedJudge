@@ -39,7 +39,7 @@
 ## 使用方法
 
 ```python
-
+import torch
 from transformers import AutoModelForCausalLM, AutoTokenizer
 from peft import PeftModel
 
