@@ -36,10 +36,31 @@
 |假设你是一名律师，请回答以下向你咨询的问题：结婚二+多年没在一起算是自动离婚不|1、如果双方都同意离婚的话，可以协议离婚。2、如果一方不同意离婚的，另一方只能起诉到法院要求判决离婚了。3、诉讼离婚需要准备身份证复印件一份;户口本原件(首页和本人页)及复印件各一张;结婚证原件及复印件两份;夫妻共同财产清单一式三份等材料提交给立案庭即可。4、法律依据《中华人民共和国民法典》第一千零七十九条 【诉讼离婚】夫妻一方要求离婚的，可以由有关组织进行调解或者直接向人民法院提起离婚诉讼。人民法院审理离婚案件，应当进行调解;如果感情确已破裂，调解无效的，应当准予离婚。有下列情形之一，调解无效的，应当准予离婚：(一)重婚或者与他人同居;(二)实施家庭暴力或者虐待、遗弃家庭成员;(三)有赌博、吸毒等恶习屡教不改;(四)因感情不和分居满二年;(五)其他导致夫妻感情破裂的情形。一方被宣告失踪，另一方提起离婚诉讼的，应当准予离婚。经人民法院判决不准离婚后，双方又分居满一年，一方再次提起离婚诉讼的，应当准予离婚。|根据中国婚姻法的规定，夫妻双方如果连续分居满两年以上，可以视为感情破裂，可以协议离婚或者起诉离婚。但是，如果夫妻之间没有达成协议，也可以通过法院判决离婚。因此，如果你和你的配偶已经连续分居超过了两年的时间，你可以考虑通过法律途径来解决你们的婚姻问题。至于是否算作自动离婚，需要具体情况具体分析，建议您咨询专业律师以获取更准确的答案。|如果双方没有办理离婚手续的话，那么婚姻关系仍然存在。但是如果你想解除这种状态下的婚姻关系，可以考虑通过协议或者诉讼的方式来解决。在协议中，你可以选择是否要分割财产、子女抚养等问题;而在诉讼中，法院会根据具体情况作出判决。无论哪种方式，都需要提供相关的证据和材料证明你们的婚姻已经无法继续下去。|
 </details>
 
+## 使用方法
+
+```python
+
+from transformers import AutoModelForCausalLM, AutoTokenizer
+from peft import PeftModel
+
+tokenizer = AutoTokenizer.from_pretrained("baichuan-inc/baichuan-7B", trust_remote_code=True)
+model = AutoModelForCausalLM.from_pretrained("baichuan-inc/baichuan-7B", device_map="auto", trust_remote_code=True)
+
+peft_model = PeftModel.from_pretrained(model, 'FedJudge/fedjudge-base-7b',torch_dtype=torch.float32).half()
+data = '假设你是一名律师，请回答以下向你咨询的问题：在法律中定金与订金的区别是什么？'
+
+inputs = tokenizer(data, return_tensors='pt')
+inputs = inputs.to('cuda:0')
+pred = peft_model.generate(**inputs, max_new_tokens=500,repetition_penalty=1.1)
+    
+pred_result = tokenizer.decode(pred.cpu()[0], skip_special_tokens=True)
+print(pred_result.split(data)[-1])
+
+```
 
 ## 未来计划
 
-- [ ] 2023年8月开源FedJudge参数
+- [x] 2023年8月开源FedJudge-base-7b lora参数
 
 - [ ] 2023年8月开源法院客户端的指令微调数据
 
@@ -48,7 +69,6 @@
 - [ ] 2023年9月发布FedJudge技术报告
 
 - [ ] 在学术领域研究如何缓解FedLLM中的Non-IID问题
-
 
 
 ## 致谢
@@ -69,4 +89,5 @@ https://github.com/baichuan-inc/Baichuan-7B
 
 ## 局限性
 
-在本项目中，模型的输出结果并非专业法律咨询的结果，可能会包含错误或不准确的内容。因此，如果您需要法律援助或专业法律咨询，请务必向法律专业人士寻求帮助。
+- 在本项目中，模型的输出结果并非专业法律咨询的结果，可能会包含错误或不准确的内容。因此，如果您需要法律援助或专业法律咨询，请务必向法律专业人士寻求帮助。
+- 本项目暂时仅支持单轮对话。
