@@ -1,9 +1,9 @@
 {
     "output_dir": "fed-all",
     "model_name_or_path": "baichuan-inc/baichuan-7B",
-    "train_file_fed1":"./train_exam.json",
-    "train_file_fed2":"./train_con2_with_article.json",
-    "train_file_fed3":"./train_4w_law_article_caiyang.json",
+    "train_file_fed1":"./train_exam.json", 
+    "train_file_fed2":"./train_con.json",
+    "train_file_fed3":"./train_court.json",
     "output_dir_fed1":"fed-env1",
     "output_dir_fed2":"fed-env2",
     "output_dir_fed3":"fed-env3",
