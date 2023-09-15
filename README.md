@@ -13,13 +13,17 @@
 
 在本项目中，由于真实场景下的法律数据难以获取，我们对公开的法律语料进行了分类和汇总，并得到了以下三个本地客户端的数据集来模拟联邦场景：
 
-- 法院客户端：收集了由<a href="https://github.com/yuelinan/C3VG" target="_blank">C3VG</a>公开的裁判文书数据集，作为法院客户端的本地数据
+- 法院客户端：将<a href="https://github.com/yuelinan/C3VG" target="_blank">C3VG</a>公开的裁判文书数据集进行数据处理，作为法院客户端的指令微调数据，已开源在<a href="https://huggingface.co/datasets/FedJudge/fedjudge-court" target="_blank">🤗</a>
 - 法律咨询公司客户端：收集了由<a href="https://github.com/AndrewZhe/lawyer-llama" target="_blank">Lawyer LLaMA</a>公开的法律咨询数据集，作为法律咨询公司客户端的本地数据
 - 法律教培机构客户端：收集了由<a href="https://github.com/AndrewZhe/lawyer-llama" target="_blank">Lawyer LLaMA</a>公开的法考数据集，作为法律教培机构客户端的本地数据
 
 ## 模型训练
 
-我们选取<a href="https://github.com/baichuan-inc/Baichuan-7B" target="_blank">baichuan-7b</a>作为FedJudge的基座模型。考虑到LLM在通信过程中的cost，我们使用baichuan-7b + lora的训练方法，在通信过程中，仅传输lora的参数。
+我们选取<a href="https://github.com/baichuan-inc/Baichuan-7B" target="_blank">baichuan-7b</a>作为FedJudge的基座模型。考虑到LLM在通信过程中的cost，我们使用baichuan-7b + lora的训练方法，在通信过程中，仅传输lora的参数，训练的得到的全局模型称为FedJudge-base。
+
+此外，由于法律数据分布的变化也会影响LLM的微调。例如在法院客户端中，文本数据通常以法律专业语言风格呈现，而在咨询客户端中，数据则更倾向于口语化描述。这种异构数据导致训练过程中的聚合性能不佳，从而大大降低了 FL 方法的有效性。而与本地模型相比，全局模型的分布差异相对较小。为此，在FedJudge-base的基础上，我们引入持续学习方法（continuual learning methods），约束各客户端在进行本地训练的同时，不要遗忘全局模型的重要知识。训练的得到的全局模型称为FedJudge-CL，个性化模型称为CL-Client**E** (**E**={1,2,3})。
+
+具体的模型设计细节，请参考我们的技术报告。
 
 ## 效果展示
 
