@@ -52,6 +52,9 @@ tokenizer = AutoTokenizer.from_pretrained("baichuan-inc/baichuan-7B", trust_remo
 model = AutoModelForCausalLM.from_pretrained("baichuan-inc/baichuan-7B", device_map="auto", trust_remote_code=True)
 
 peft_model = PeftModel.from_pretrained(model, 'FedJudge/fedjudge-base-7b',torch_dtype=torch.float32).half()
+# peft_model = PeftModel.from_pretrained(model, 'FedJudge/fedjudge-cl-7b',torch_dtype=torch.float32).half()
+# peft_model = PeftModel.from_pretrained(model, 'FedJudge/fedjudge-cl-client3-7b',torch_dtype=torch.float32).half()
+
 data = '假设你是一名律师，请回答以下向你咨询的问题：在法律中定金与订金的区别是什么？'
 
 inputs = tokenizer(data, return_tensors='pt')
@@ -67,20 +70,26 @@ print(pred_result.split(data)[-1])
 
 - [x] 2023年8月开源FedJudge-base-7b lora参数
 
-- [ ] 2023年8月开源法院客户端的指令微调数据
+- [x] 2023年8月开源法院客户端的指令微调数据
 
-- [ ] 2023年9月开源训练代码
+- [x] 2023年9月开源训练代码
 
-- [ ] 2023年9月发布FedJudge技术报告
+- [x] 2023年9月发布FedJudge技术报告
 
-- [ ] 在学术领域研究如何缓解FedLLM中的Non-IID问题
+- [ ] 在baichuan2-7b 和 baichuan2-13b 上进行训练
+
+- [ ] 增加多轮对话能力
 
 
 ## 致谢
 
 在本项目的开发过程中，获得了以下项目的帮助，在此表示感谢。
 
-https://github.com/AndrewZhe/lawyer-llama
+https://github.com/yangjianxin1/Firefly [训练代码参考]
+
+https://github.com/beyondguo/LLM-Tuning [训练代码参考]
+
+https://github.com/AndrewZhe/lawyer-llama [训练数据参考]
 
 https://github.com/LiuHC0428/LAW-GPT
 
