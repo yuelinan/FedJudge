@@ -105,3 +105,15 @@ https://github.com/baichuan-inc/Baichuan-7B
 
 - 在本项目中，模型的输出结果并非专业法律咨询的结果，可能会包含错误或不准确的内容。因此，如果您需要法律援助或专业法律咨询，请务必向法律专业人士寻求帮助。
 - 本项目暂时仅支持单轮对话。
+
+## 引用
+```
+@misc{fedjudge-github,
+  author={Linan Yue and Qi Liu and Yichao Du and Weibo Gao and Ye Liu and Fangzhou Yao},
+  title={FedJudge: Federated Legal Large Language Model},
+  year={2023},
+  publisher={GitHub},
+  journal={GitHub repository},
+  howpublished={\url{https://github.com/yuelinan/FedJudge}},
+}
+```
