@@ -108,6 +108,13 @@ https://github.com/baichuan-inc/Baichuan-7B
 
 ## 引用
 ```
+@article{yue2023fedjudge,
+  title={FedJudge: Federated Legal Large Language Model},
+  author={Yue, Linan and Liu, Qi and Du, Yichao and Gao, Weibo and Liu, Ye and Yao, Fangzhou},
+  journal={arXiv preprint arXiv:2309.08173},
+  year={2023}
+}
+
 @misc{fedjudge-github,
   author={Linan Yue and Qi Liu and Yichao Du and Weibo Gao and Ye Liu and Fangzhou Yao},
   title={FedJudge: Federated Legal Large Language Model},
