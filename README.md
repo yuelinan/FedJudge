@@ -9,6 +9,10 @@
 
 为此，我们提出了**FedJudge**，一个联邦法律大模型（Federated Legal Large Language Model）。
 
+## News
+- [2024.03.16] :fire: "FedJudge: Federated Legal Large Language Model" is accepted by DASFAA 2024 (Oral) !
+
+  
 ## 训练数据
 
 在本项目中，由于真实场景下的法律数据难以获取，我们对公开的法律语料进行了分类和汇总，并得到了以下三个本地客户端的数据集来模拟联邦场景：
@@ -65,7 +69,7 @@ pred_result = tokenizer.decode(pred.cpu()[0], skip_special_tokens=True)
 print(pred_result.split(data)[-1])
 
 ```
-
+<!--  
 ## 未来计划
 
 - [x] 2023年8月开源FedJudge-base-7b lora参数
@@ -79,7 +83,7 @@ print(pred_result.split(data)[-1])
 - [ ] 在baichuan2-7b 和 baichuan2-13b 上进行训练
 
 - [ ] 增加多轮对话能力
-
+-->
 
 ## 致谢
 
