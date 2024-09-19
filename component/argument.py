@@ -19,7 +19,7 @@ class QLoRAArguments:
     一些自定义参数
     """
     max_seq_length: int = field(metadata={"help": "输入最大长度"})
-    train_file: str = field(metadata={"help": "训练集"})
+    # train_file: str = field(metadata={"help": "训练集"})
     train_file_fed1: str = field(metadata={"help": "训练集"})
     train_file_fed2: str = field(metadata={"help": "训练集"})
     train_file_fed3: str = field(metadata={"help": "训练集"})
